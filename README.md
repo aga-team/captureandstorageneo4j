@@ -85,7 +85,12 @@ Let’s view the user's (with id=4) graph of 5-nearest neighbors:
 These users, in descending order, rated movies most similarly to user with id = 4.
 
 References
-[1] Wei Dong, Charikar Moses & Kai Li , Efficient k-nearest neighbor graph construction for generic similarity measures, Proceedings of the 20th international conference on World wide web Association for Computing Machinery (2011)577–586. https://doi.org/10.1145/1963405.1963487 [2]
+[1] Wei Dong, Charikar Moses & Kai Li , Efficient k-nearest neighbor graph construction for generic similarity measures, Proceedings of the 20th international conference on World wide web Association for Computing Machinery (2011)577–586. https://doi.org/10.1145/1963405.1963487
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+Why neo4j ?
+
 
 
 
