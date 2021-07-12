@@ -8,7 +8,7 @@ git clone https://github.com/aga-team/captureandstorageneo4j
 
 2) Go to recommendation_by_user_similarity dir: 
 
-cd captureandstorageneo4j/recommendation_by_user_similarity 
+cd captureandstorageneo4j/recommendation_movie_by_user_similarity 
 
 3) Run the following command to build the docker image (-t specifies a name and version tag for the image, . specifies the "build context"   directory where Dockerfile ), it takes approximately 10 min  :
 
@@ -36,7 +36,7 @@ git clone https://github.com/aga-team/captureandstorageneo4j
 
 2) Go to recommendation_by_movie_similarity dir: 
 
-cd captureandstorageneo4j/recommendation_by_movie_similarity 
+cd captureandstorageneo4j/recommendation_movie_by_movie_similarity 
 
 3) Run the following command to build the docker image (-t specifies a name and version tag for the image, . specifies the "build context"   directory where Dockerfile ) , it takes approximately 30 min  :
 
