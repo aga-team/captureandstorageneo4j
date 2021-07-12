@@ -22,7 +22,7 @@ docker images
 
 docker run -it --name neo1 neo4j-load:1 
 
-6) Before runnig the following command open a new terminal to run it. We use Cpyher Query Language to extract data from neo4j database: we make the movie query that gives the movies recommended to a gven user:
+6) Before runnig the following command open a new terminal to run it. We use Cpyher Query Language to extract data from neo4j database making the query that gives the movies recommended to a gven user:
 
 docker exec -ti neo1 cypher-shell -u neo4j -p test  -f movie_by_user_query.cql
 
@@ -60,7 +60,7 @@ docker exec -ti neo4j1 -u neo4j -p test "CALL  db.labels();"
 
 docker exec -ti neo4j1 -u neo4j -p test "CALL db.relationshipTypes();"
 
-9) We will use Cpyher Query Language to extract data from neo4j database:we make the movie query that gives the movies recommended to a gven user:
+9) We will use Cpyher Query Language to extract data from neo4j database making the movie query that gives the movies recommended to a gven user:
 
 docker exec -ti neo4j1 cypher-shell -u neo4j -p test  -f movie_query.cql
 
