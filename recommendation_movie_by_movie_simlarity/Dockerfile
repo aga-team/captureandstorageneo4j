@@ -2,13 +2,11 @@ FROM neo4j:4.2.1
 
 ENV NEO4J_HOME="/var/lib/neo4j"   
 ENV NEO4J_PASSWD test 
-ENV NEO4J_AUTH neo4j/${NEO4J_PASSWD}
 ENV PATH "${NEO4J_HOME}"/bin:$PATH
 ENV HOSTNAME bolt://$HOST:7687
 EXPOSE 7687 7474 8080
 
 COPY load_data.cql ${NEO4J_HOME}/import/
-COPY movie_query.cql ${NEO4J_HOME}/import/
 COPY movie_query.cql .
 
 ################## install dependencies and get csv files from website ##########
