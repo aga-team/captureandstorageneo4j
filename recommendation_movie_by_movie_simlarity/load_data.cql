@@ -13,21 +13,21 @@ MERGE (:Movies {movieId: toInteger(row.movieId),title:row.title, rating_mean:toF
 LOAD CSV WITH HEADERS FROM "file:///genres.csv" AS row
 MERGE (:Genres {genres: row.genres});
 
-LOAD CSV WITH HEADERS FROM "file:///users_movies.csv" AS row
+LOAD CSV WITH HEADERS FROM "file:///users_movies.csv" AS row 
 FIELDTERMINATOR '|'
 WITH row WHERE row.rating IS NOT NULL
-MATCH (user:Users {userId: row.userId}), (movie:Movies {movieId: row.movieId})
+MATCH (user:Users {userId: toInteger(row.userId) }), (movie:Movies {movieId: toInteger(row.movieId)}) 
 MERGE (user)-[r:WATCHED {rating: toFloat(row.rating)}]->(movie) ;
 
 LOAD CSV WITH HEADERS FROM "file:///users_genres.csv" AS row
 FIELDTERMINATOR '|'
-MATCH (user:Users {userId: row.userId} ),(genres:Genres {genres: row.genre} )
+MATCH (user:Users {userId:  toInteger(row.userId) }),(genres:Genres {genres: row.genre} )
 MERGE (user)-[f:FAVORITE]->(genres) ;
 
 LOAD CSV WITH HEADERS FROM "file:///movies_genres.csv" AS row
 FIELDTERMINATOR '|'
 WITH row WHERE row.genres IS NOT NULL
-MATCH (movie:Movies {movieId: row.movieId}), (genres:Genres {genres: row.genres})
+MATCH (movie:Movies {movieId: toInteger(row.movieId) }), (genres:Genres {genres: row.genres})
 MERGE (movie)-[:GENRES]->(genres);
 
 LOAD CSV WITH HEADERS FROM "file:///movies_similarity.csv" AS row
