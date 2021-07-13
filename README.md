@@ -38,7 +38,7 @@ git clone https://github.com/aga-team/captureandstorageneo4j
 
 cd captureandstorageneo4j/recommendation_movie_by_movie_similarity 
 
-3) Run the following command to build the docker image (-t specifies a name and version tag for the image, . specifies the "build context"   directory where Dockerfile ) , it takes approximately 30 min  :
+3) Run the following command to build the docker image (-t specifies a name and version tag for the image, . specifies the "build context"   directory where Dockerfile ) , it takes approximately 20 min  and the image size is 1.81 GB :
 
 docker build -t neo4j-load-movie:1 .
 
@@ -46,7 +46,7 @@ docker build -t neo4j-load-movie:1 .
 
 docker images
 
-5) Running container (it takes approximately 30 min):
+5) Running container (it takes approximately 15 min):
 
 docker run -it --name neo4j1 neo4j-load-movie:1
 
