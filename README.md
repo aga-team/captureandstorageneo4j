@@ -56,7 +56,8 @@ docker exec -ti neo4j1 cypher-shell -u neo4j -p test  -f movie_query.cql
 
 ------------------------------------------------------------------------------------------------------------
 
-#Recommender systems
+Recommender systems
+
 
 Recommender systems can be broadly divided into two categories : content based and collaborative filtering based.
 
@@ -66,19 +67,21 @@ In this work, we focus on the property of the “similarity” with the assumpti
 if a user likes a certain item like a movie, he may like similar movies in the future.
 These assumption holds to a certain extent. For example, if I like to watch movies like Lord of the Rings, Pirates of the Caribbean, it’s likely that I’ll like other fantasy/adventure based movies like The The Hobbit or Stardust.
 
-To find similar movies, one can use K-nearest neighbor(KNN). K-nearest neighbor finds the k most similar items to a particular instance based on a given distance metric like euclidean, jaccard similarity , minkowsky or custom distance measures.
-In an unsupervised setting such as this context one can simply find the neighbors and use them to recommend similar items. 
-In rough words, to suggest similar movies we first find k-similar movies’s and recommend them to user. 
+To find similar movies, one can find the most similar items to a particular instance based on a given distance metric like euclidean, jaccard similarity , minkowsky or custom distance measures.
+One can simply find the most similar similar movies and recommend them to user. 
 In this case we have retrieved top 5 most similar movies’s to a given query.
-For example, if I query “Naruto” to the recommender system, it will return me top 5 movies’s similar to Naruto.
+For example, if I query “The Matrix” to the recommender system, it will return me top 5 movies’s similar to "The Matrix".
 One can use genre, tags, rating as features.
 
-If we know what movies a user has watched, we can use this information to recommend similar movies:
-Recommend movies similar to those the user has already watched. 
-Content recommendation by overlapping genres: given these genres, we can know which users like which genre, as a result, we can obtain 
+So if we know what movies a user has watched, we can use this information to recommend similar movies:
+recommending movies similar to those the user has already watched. 
+
+Content recommendation by overlapping genres:
+
+Given the genres, one can know which users like which genre, as a result, we can obtain 
 features corresponding to that particular user, depending on how he reacts to movies of that genre. 
 Once we know the likings of the user we can embed him in an embedding space using the feature vector generated 
-and recommend him/her according to his choice. 
+and recommend him according to his choice. 
 During recommendation, the similarity metrics are calculated from the item’s feature vectors and the user’s preferred feature vectors from his
 previous records. Then, the top few are recommended.
 Similarity metrics are mathematical measures which are used to determine how similar is a vector to a given vector.
@@ -87,6 +90,7 @@ Here, we will use as similarity metrics the cosine similarity (the Cosine angle 
 Content-based filtering does not require other users' data during recommendations to one user.
 
 Collaborative filtering:
+
 Collaborative filtering does not need the features of the items to be given. 
 Every user and item is described by a feature vector or embedding.
 It creates embedding for both users and items on its own. It embeds both users and items in the same embedding space.
@@ -96,15 +100,18 @@ recommend items to that user. It collects user feedbacks on different items and 
 One can use the ratings of other users in the network to find movies to recommend.
 "Users who watched and like this movie, also watched and looked that other movie."
 
-The cosine similarity of two users will tell us how similar two users' preferences for movies are. Users with a high cosine similarity will have similar preferences
-We want to create a [:SIMILARITY] relationship between each user in the graph, where their cosine similarity 
-is a property of the relationship. 
-Find the users with the most similar preferences to user with id=4, according to cosine similarity function.
-Who are the 10 users with tastes in movies most similar to mine? 
-What movies have they rated highly that I haven’t seen yet?"
-With the similarities added to the graph, it is easy to view your k-nearest neighbors. 
-Let’s view the user's (with id=4) graph of 5-nearest neighbors:
-These users, in descending order, rated movies most similarly to user with id = 4.
+The cosine similarity of two users will tell us how similar two users' preferences for movies are. 
+Users with a high cosine similarity will have similar preferences.
+One can create a [:SIMILARITY] relationship between each user in the graph, where their cosine similarity 
+is a property of the relationship to find the users with the most similar preferences to a given user, 
+according to cosine similarity function.
+Answering questions like: 
+- Who are the 10 users with tastes in movies most similar to mine? 
+- What movies have they rated highly that I haven’t seen yet?
+
+With the similarities added to the graph, it is easy to make a cypher query that let us
+view the user's (with id=4) graph of 5-nearest neighbors in descending order, that 
+rated movies most similarly to user (with id = 4).
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
