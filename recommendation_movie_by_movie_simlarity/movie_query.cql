@@ -27,8 +27,7 @@
 MATCH (u1:Users)-[:WATCHED]->(m3:Movies)
 WHERE u1.userId=8
 WITH [i in m3.movieId | i] as movies
-MATCH path = (u:Users)-[:WATCHED]->(m1:Movies)-[s:SIMILAR]->
-(m2:Movies),
+MATCH path = (u:Users)-[:WATCHED]->(m1:Movies)-[s:SIMILAR]->(m2:Movies),
 (m2)-[:GENRES]->(g:Genres),
 (u)-[:FAVORITE]->(g)
 WHERE u.userId =8 and not m2.movieId in movies
