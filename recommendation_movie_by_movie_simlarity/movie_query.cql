@@ -35,7 +35,7 @@ WHERE u.userId =8 and not m2.movieId in movies
 RETURN distinct u.userId as userId, g.genres as genres,
 m2.title as title, m2.rating_mean as rating
 ORDER BY m2.rating_mean descending
-LIMIT 5
+LIMIT 5 ;
 
 
 
