@@ -46,7 +46,7 @@ docker build -t neo4j-load-movie:1 .
 
 docker images
 
-5) Running containe takes approximately 15 min (it may require additional memory in docker configutation to run python script, I used 4 GB but at least should be more than 1 GB, this might be a good reason to try to do all in cypher to check if it is more efficient) :
+5) Running containe takes approximately 15 min (it may require additional memory in docker configutation to run python script, I used 4 GB but it should be more than 1 GB at least, this might be a good reason to try to do all in cypher to check if it is more efficient) :
 
 docker run -it --name neo4j1 neo4j-load-movie:1
 
