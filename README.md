@@ -30,7 +30,30 @@ Para más información sobre Python, visite https://www.python.org/about/
 
 ### NEO4J
 
+#### Introduccion
 
+Neo4j es una base de datos abierta, NoSQL y con soporte de ACID que almacena la información en forma nativa utilizando una estructura basada en grafos. Su código fuente, escrito en Java y Scala, está disponible en forma gratuita en Github desde 2007. También se puede probar la misma bajando una aplicación de escritorio en su sitio web. 
+
+Neo4j se define como una base de grafos nativa ya que implementa de forma eficiente las propiedades de los modelos de grafos a la hora de almacenar los datos. Esto quiere decir que los datos están almacenados siguiendo el mismo esquema que podemos plantear en un pizarron y la base de datos utiliza punteros para navegar y recorrer el grafo. A diferencia de los procesadores de grafos o las librerias en memoria, Neo4j tambien provee caracteristicas propias de las bases de datos convencionales, como ser el soporte transcaccional de tipo ACID, soporte para clusters y tolerancia a fallos, lo cual la convierte en candidata ideal para usar grafos en entornos productivos. 
+
+Algunas de las prestaciones que vuelven popular a Neo4j entre desarrolladores, arquitectos y DBAs son: 
+
+- Cypher, el lenguaje de consulta declaratio, similar a SQL pero optimizado para grafos.
+- Tiempo de exploracion constantes en grafos grandes gracias a la representacion eficiente de nodos y relaciones que posibilita escalar a millones de nodos en hardware moderado.
+- Esquema de modelo de grafos con propiedades flexible, lo cual posibilita la adaptacion con el paso del tiempo para agregar nuevas relaciones cuando las necesidades del proyecto cambian.
+- Drivers para los lenguajes de programacion mas populares, incluyendo Java, JavaScript, .NET, Python, y muchos mas.
+
+#### El modelo de grafos con propiedaes
+
+El enfoque utilizado por Neo4j para manejar los componentes de la base de datos basada en grafos es el del **modelo de grafos con propiedades**, donde los datos están organizados como **nodos**, **relaciones** y **propiedades** (datos almacenados en los nodos o en las relaciones).
+
+Los **nodos** son las entidades del grafo. Estos pueden guardar un número indefinido de atributos como pares llave:valor llamados **propiedades**. Los nodos pueden ser identificados mediante etiquetas, las cuales representan los diferentes roles en un dominio dado. Esta etiquetas también pueden utilizarse para añadir metadata (como índices o información sobre vínculos) a ciertos nodos.
+
+Las **relaciones** proveen conexiones dirigidas, nombradas y semanticamente relevantes entre entidades nodales. (Por ejemplo _Empleado_ TRABAJA_PARA _Compañía_)
+
+
+
+Para probar Neo4j, visite https://neo4j.com/try-neo4j/
 
 ### DOCKER
 
