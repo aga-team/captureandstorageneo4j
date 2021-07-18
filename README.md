@@ -38,7 +38,7 @@ Neo4j se define como una base de grafos nativa ya que implementa de forma eficie
 
 Algunas de las prestaciones que vuelven popular a Neo4j entre desarrolladores, arquitectos y DBAs son: 
 
-- Cypher, el lenguaje de consulta declaratio, similar a SQL pero optimizado para grafos.
+- Cypher, el lenguaje de consulta declarativo, similar a SQL pero optimizado para grafos.
 - Tiempo de exploracion constantes en grafos grandes gracias a la representacion eficiente de nodos y relaciones que posibilita escalar a millones de nodos en hardware moderado.
 - Esquema de modelo de grafos con propiedades flexible, lo cual posibilita la adaptacion con el paso del tiempo para agregar nuevas relaciones cuando las necesidades del proyecto cambian.
 - Drivers para los lenguajes de programacion mas populares, incluyendo Java, JavaScript, .NET, Python, y muchos mas.
@@ -51,6 +51,15 @@ Los **nodos** son las entidades del grafo. Estos pueden guardar un número indef
 
 Las **relaciones** proveen conexiones dirigidas, nombradas y semanticamente relevantes entre entidades nodales. (Por ejemplo _Empleado_ TRABAJA_PARA _Compañía_)
 
+Una relación siempre tiene una dirección, un tipo, un nodo de incio y un nodo de fin. Al igual que los nodos, las relaciones también pueden tener propiedades. En la mayoría de los casos, las relaciones poseen propiedades cuantitativas, como pesos, costos, distancias, ratings, intervalos temporales, o fuerzas. 
+
+Puesto que las relaciones se guardan de forma muy eficiente, dos nodos pueden compartir cualquier número de relaciones sin sacrificar performance.
+
+Finalmente, notemos que si bien las relaciones se guardan con una dirección prestablecida, las mismas se pueden recorrer en forma eficiente en cualquier dirección.
+
+El siguiente esquema (en inglés) permite entender de forma más acabada el modelo de grafos con propiedades que acabamos de describir.
+
+![Esquema de un modelo de grafos con propiedades] (https://dist.neo4j.com/wp-content/uploads/property_graph_elements.jpg)
 
 
 Para probar Neo4j, visite https://neo4j.com/try-neo4j/
