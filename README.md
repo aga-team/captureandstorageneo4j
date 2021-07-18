@@ -66,7 +66,35 @@ El siguiente esquema permite entender de forma más acabada el modelo de grafos 
 
 Cypher es un lenguaje de consulta declarativo que permite consultar, actualizar y administrar la base de datos basada en grafos de manera simple y eficiente. 
 
-- **Estructura** Cypher toma prestada su estructura de SQL, en el sentido de que las consultas se construyen en base a cláusulas que pueden concatenarse entre si y pasar los resultados de una a otra. Algunos de las comandos más importantes son: `MATCH`, que expresa el patrón de grafo a evaluar (equivalente a un `SELECT`); `WHERE` usualmente vinculada con las clásulas `MATCH`, `OPTIONAL MATCH` y `WITH`; `RETURN` que expresa el resultado a mostrar.
+El mismo toma prestada su estructura de SQL, en el sentido de que las consultas se construyen en base a cláusulas que pueden concatenarse entre si y pasar los resultados de una a otra. 
+
+Algunos de las comandos de **consulta** más importantes son: 
+
+- `MATCH`, que expresa el patrón de grafo a evaluar (equivalente a un `SELECT`).
+- `WHERE` usualmente vinculada con las clásulas `MATCH`, `OPTIONAL MATCH` y `WITH`.
+- `RETURN` que expresa el resultado a mostrar.
+
+Por otro lado, aquellos comandos más relevantes relacionados con la **actualización** son
+
+- `CREATE` (y `DELETE`), permite crear (eliminar) nodos y relaciones.
+- `SET` (y `REMOVE`), permite asignar (quitar) valores a las propiedades o bien crear (remover) etiquetas en los nodos.
+- `MERGE`, Matchea con los existentes o crea nuevos nodos y patrones. Se usa principalmente en combinación con vínculos únicos.
+
+Para entender mejor el funcionamiento, analicemos un ejemplo sencillo. Primero creamos una pequeña base de datos, que consiste en 5 nodos de tipo `Person` y 2 relaciones de tipo `FRIEND`, respectivamente:
+
+```
+CREATE (john:Person {name: 'John'})
+CREATE (joe:Person {name: 'Joe'})
+CREATE (steve:Person {name: 'Steve'})
+CREATE (sara:Person {name: 'Sara'})
+CREATE (maria:Person {name: 'Maria'})
+CREATE (john)-[:FRIEND]->(joe)-[:FRIEND]->(steve)
+CREATE (john)-[:FRIEND]->(sara)-[:FRIEND]->(maria)
+```
+Esta base presenta la siguiente estructura:
+
+<img src="/images/dummy_db_structure.svg" alt="drawing" width="20%"/>
+
 
 
 Para conocer más sobre Cypher, visite https://neo4j.com/docs/cypher-manual/current/introduction/#cypher-intro
@@ -76,7 +104,7 @@ Para conocer más sobre Cypher, visite https://neo4j.com/docs/cypher-manual/curr
 
 #### Introducción
 
-Docker es una plataforma abierta para desarrollar, transportar y correr aplicaciones. El mismo permite separar las aplicaciones de la infrastructura, posibilitando una entrega de software rápida.
+Docker es una plataforma abierta para desarrollar, transportar y correr aplicaciones que nació de la mano de Solomon Hykes en 2013. El mismo permite separar las aplicaciones de la infrastructura, posibilitando una entrega de software rápida.
 
 Docker provee la habilidad de empaquetar y correr una aplicación en un entorno "aislado" llamado container. El aislamiento y la seguridad permite que puedan correrse varios containers al mismo tiempo en un host dado. Los containers son livianos y contienen todo lo necesario para correr la aplicación, evitando así la necesidad de tener que confiar en los paquetes instalados en el host. Los containers se emplean principalmente para compartir desarrollos y garantizarse de que cada destinatario recibe el mismo entorno y que todo funciona de la misma manera. Este último punto fue el que motivó la elección del mismo como medio para distribuir nuestro trabajo.
 
@@ -114,15 +142,11 @@ Para construir una imágen, es necesario crear un `Dockerfile`, el cual, mediant
 
 **Containers**
 
-A container is a runnable instance of an image. You can create, start, stop, move, or delete a container using the Docker API or CLI. You can connect a container to one or more networks, attach storage to it, or even create a new image based on its current state.
+Un container es una instancia ejecutable de una imágen. Se puede crear, iniciar, detener, mover o borrar un container usando la API de Docker o la interfaz de línea de comandos (CLI). A su vez, un container puede conectarse a una o más redes, se le pueden asignar unidades de almacenamiento e incluso se puede crear una imágen basada en su estado en ese momento.
 
-By default, a container is relatively well isolated from other containers and its host machine. You can control how isolated a container’s network, storage, or other underlying subsystems are from other containers or from the host machine.
+Por defecto, un container está relativamente bien aislado de otros containers y de su host. De hecho, se pueden controlar cuán aisladas están sus redes, sus unidades de almacenamiento u otros subsistemas de interés.
 
-A container is defined by its image as well as any configuration options you provide to it when you create or start it. When a container is removed, any changes to its state that are not stored in persistent storage disappear.
-An image is a read-only template with instructions for creating a Docker container. Often, an image is based on another image, with some additional customization. For example, you may build an image which is based on the ubuntu image, but installs the Apache web server and your application, as well as the configuration details needed to make your application run.
-
-You might create your own images or you might only use those created by others and published in a registry. To build your own image, you create a Dockerfile with a simple syntax for defining the steps needed to create the image and run it. Each instruction in a Dockerfile creates a layer in the image. When you change the Dockerfile and rebuild the image, only those layers which have changed are rebuilt. This is part of what makes images so lightweight, small, and fast, when compared to other virtualization technologies.
-
+Un container está definido por su imágen, así como también por las opciones de configuración que se proveyeron cuando se creó o se inició. Cuando un container es removido, cualquier cambio de estado que haya sufrido se pierde a menos que se haya persistido en alguna unidad de almacenamiento permanente fuera del mismo.
 
 ## ETAPAS DEL PROCESO DE IMPLEMENTACION
 
