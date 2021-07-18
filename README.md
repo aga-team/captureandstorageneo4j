@@ -95,7 +95,42 @@ Esta base presenta la siguiente estructura:
 
 <img src="/images/dummy_db_structure.svg" alt="drawing" width="20%"/>
 
+Sobre la misma, podemos realizar una consulta que muestre los amigos de amigos (friends of friends or fof) del usuario `John` escribiendo
 
+```
+MATCH (john {name: 'John'})-[:FRIEND]->()-[:FRIEND]->(fof)
+RETURN john.name, fof.name
+```
+El resultado es el siguiente
+
+```
++----------------------+
+| john.name | fof.name |
++----------------------+
+| "John"    | "Maria"  |
+| "John"    | "Steve"  |
++----------------------+
+2 rows
+```
+
+Para ver cuestiones que hacen al filtrado, escribamos ahora una consulta que muestre aquellos usuarios que tengan algún otro usuario como amigo directo (`follower`) cuyo nombre (propiedad) empiece con la letra `S`:
+
+```
+MATCH (user)-[:FRIEND]->(follower)
+WHERE user.name IN ['Joe', 'John', 'Sara', 'Maria', 'Steve'] AND follower.name =~ 'S.*'
+RETURN user.name, follower.name
+```
+Ahora el resultado obtenido es,
+
+```
++---------------------------+
+| user.name | follower.name |
++---------------------------+
+| "John"    | "Sara"        |
+| "Joe"     | "Steve"       |
++---------------------------+
+2 rows
+```
 
 Para conocer más sobre Cypher, visite https://neo4j.com/docs/cypher-manual/current/introduction/#cypher-intro
 
