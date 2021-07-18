@@ -20,6 +20,8 @@ Estudiar las fases de captura y almacenamiento de la información implementando 
 
 ### PYTHON
 
+<img src="/images/python.png" alt="drawing" width="20%"/>
+
 Nacido en 1991 de la mano de Guido Van Rossum, Python es un lenguaje de programación interpretado cuya filosofía hace hincapié en la legibilidad de su código. Se trata de un lenguaje multiparadigma, pues soporta la programación orientada a objetos (OOP), imperativa y, en menor medida, funcional. 
 
 Python es un lenguaje interpretado, dinámico y multiplataforma que actualmente es administrado por la Python Software Foundation (PSF). El mismo posee una licencia de código abierto, denominada Python Software Foundation License.
@@ -28,11 +30,14 @@ Las motivaciones principales a la hora de utilizar este lenguaje para nuestro de
 
 Para más información sobre Python, visite https://www.python.org/about/
 
+
 ### NEO4J
+
+<img src="/images/Neo4j-logo_color.png" alt="drawing" width="20%"/>
 
 #### Introduccion
 
-Neo4j es una base de datos abierta, NoSQL y con soporte de ACID que almacena la información en forma nativa utilizando una estructura basada en grafos. Su código fuente, escrito en Java y Scala, está disponible en forma gratuita en Github desde 2007. También se puede probar la misma bajando una aplicación de escritorio en su sitio web. 
+Neo4j es una base de datos abierta, NoSQL y con soporte de ACID que almacena la información en forma nativa utilizando una estructura basada en grafos. Su código fuente, escrito en Java y Scala, está disponible en forma gratuita en Github desde 2007. También se puede probar la misma bajando una aplicación de escritorio en su sitio web https://neo4j.com/try-neo4j/. 
 
 Neo4j se define como una base de grafos nativa ya que implementa de forma eficiente las propiedades de los modelos de grafos a la hora de almacenar los datos. Esto quiere decir que los datos están almacenados siguiendo el mismo esquema que podemos plantear en un pizarron y la base de datos utiliza punteros para navegar y recorrer el grafo. A diferencia de los procesadores de grafos o las librerias en memoria, Neo4j tambien provee caracteristicas propias de las bases de datos convencionales, como ser el soporte transcaccional de tipo ACID, soporte para clusters y tolerancia a fallos, lo cual la convierte en candidata ideal para usar grafos en entornos productivos. 
 
@@ -47,24 +52,27 @@ Algunas de las prestaciones que vuelven popular a Neo4j entre desarrolladores, a
 
 El enfoque utilizado por Neo4j para manejar los componentes de la base de datos basada en grafos es el del **modelo de grafos con propiedades**, donde los datos están organizados como **nodos**, **relaciones** y **propiedades** (datos almacenados en los nodos o en las relaciones).
 
-Los **nodos** son las entidades del grafo. Estos pueden guardar un número indefinido de atributos como pares llave:valor llamados **propiedades**. Los nodos pueden ser identificados mediante etiquetas, las cuales representan los diferentes roles en un dominio dado. Esta etiquetas también pueden utilizarse para añadir metadata (como índices o información sobre vínculos) a ciertos nodos.
+- **Nodos** 
+Los nodos son las entidades del grafo. Estos pueden guardar un número indefinido de atributos como pares `{llave: valor}` llamados **propiedades**. Los nodos pueden ser identificados mediante etiquetas, las cuales representan los diferentes roles en un dominio dado. Las mismas, pueden utilizarse también para añadir metadata, como índices o información sobre vínculos.
 
-Las **relaciones** proveen conexiones dirigidas, nombradas y semanticamente relevantes entre entidades nodales. (Por ejemplo _Empleado_ TRABAJA_PARA _Compañía_)
+- **Relaciones** 
+Las relaciones proveen conexiones dirigidas, nombradas y semanticamente relevantes entre entidades nodales (Por ejemplo _Empleado_ TRABAJA_PARA _Compañía_). Una relación siempre tiene una dirección, un tipo, un nodo de incio y un nodo de fin. Al igual que los nodos, las relaciones también pueden tener propiedades, las cuales, en la mayoría de los casos, suelen ser cuantitativas: pesos, costos, distancias, ratings, intervalos temporales, fuerzas, etc. Puesto que las relaciones se guardan de forma eficiente, dos nodos pueden compartir cualquier número de relaciones sin sacrificar performance y las mismas se pueden recorrer en forma eficiente en cualquier dirección.
 
-Una relación siempre tiene una dirección, un tipo, un nodo de incio y un nodo de fin. Al igual que los nodos, las relaciones también pueden tener propiedades. En la mayoría de los casos, las relaciones poseen propiedades cuantitativas, como pesos, costos, distancias, ratings, intervalos temporales, o fuerzas. 
+El siguiente esquema permite entender de forma más acabada el modelo de grafos con propiedades que acabamos de describir.
 
-Puesto que las relaciones se guardan de forma muy eficiente, dos nodos pueden compartir cualquier número de relaciones sin sacrificar performance.
+<img src="/images/property_graph_elements.jpg" alt="drawing" width="90%"/>
 
-Finalmente, notemos que si bien las relaciones se guardan con una dirección prestablecida, las mismas se pueden recorrer en forma eficiente en cualquier dirección.
+#### Lenguaje de consulta Cypher
 
-El siguiente esquema (en inglés) permite entender de forma más acabada el modelo de grafos con propiedades que acabamos de describir.
+Cypher es un lenguaje de consulta declarativo que permite consultar, actualizar y administrar la base de datos basada en grafos de manera simple y eficiente. 
 
-![Esquema de un modelo de grafos con propiedades] (https://dist.neo4j.com/wp-content/uploads/property_graph_elements.jpg)
+- **Estructura** Cypher toma prestada su estructura de SQL — las consultas estan se construyen en base a cláusulas que pueden concatenarse entre si y pasar los resultados de una a otra. Por ejemplo, la variable que surja del uso de una clausula `MATCH` será el contexto en el que la siguiente cláusula existirá. Algunos de las comandos más importantes son: `MATCH`, que expresa el patrón de grafo a evaluar (equivalente a un `SELECT`); `WHERE` usualmente vinculada con las clásulas `MATCH`, `OPTIONAL MATCH` y `WITH`; `RETURN` que expresa el resultado a mostrar.
 
 
-Para probar Neo4j, visite https://neo4j.com/try-neo4j/
+Para conocer más sobre Cypher, visite https://neo4j.com/docs/cypher-manual/current/introduction/#cypher-intro
 
 ### DOCKER
+<img src="/images/docker.png" alt="drawing" width="20%"/>
 
 ## ETAPAS DEL PROCESO DE IMPLEMENTACION
 
