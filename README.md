@@ -1,4 +1,74 @@
-## captureandstorageneo4j
+# CAPTURA Y ALMACENAMIENTO DE DATOS USANDO NEO4J
+
+## INTRODUCCION
+
+El código almacenado en este repositorio constituye el entregable final para la materia "Captura y almacenamiento de la información" de la "Especialización en Inteligencia de Datos orientada a Big Data" dictada en la Facultad de Informática de la Universidad Nacional de La Plata.
+
+https://www.info.unlp.edu.ar/especializacion-en-inteligencia-de-datos-orientada-a-big-data/
+
+
+## OBJETIVO
+
+Estudiar las fases de captura y almacenamiento de la información implementando un prototipo de recomendador de películas basado en Python y Neo4j.
+
+## DESCRIPCION DE LAS HERRAMIENTAS UTILIZADAS
+
+### PYTHON
+
+### NEO4J
+
+### DOCKER
+
+## ETAPAS DEL PROCESO DE IMPLEMENTACION
+
+### CAPTURA
+
+Captura de la información (via wget en el dockerfile)
+
+### PREPROCESAMIENTO
+ 
+Preprocesamiento (via script python)
+
+Definicion del algoritmo para calcular la similitud entre dos películas (via script python)
+
+Fase 1: Armamos una matriz  de movies vs tags con la relevancia del tag en la celda
+
+Fase 2: Armamos una matriz películas vs generos con el flag si esta presente el genero en cada celda
+
+Fase 3: Defino una segmentación por años de las distintas películas (categorica ordinal del 1 al 5) y calculo un rating promedio dentro de cada una de esas categorías
+
+Fase 4: Calculo la similitud entre dos películas como combinación lineal de las cosine similarity entre tag relevance, genres y ratings.
+
+Fase 5: Generacion de contenido a ser cargado en neo4j
+
+### ALMACENAMIENTO
+
+Carga de nodos y relaciones en Neo4j leyendo el output anterior
+
+Nodos: 
+
+-	Usuarios
+o	User id
+-	Movies
+o	Titulo
+o	Rating_mean
+-	Genres
+o	Genre_id
+
+Relaciones:
+
+-	Watched (user-movie)
+o	Rating
+-	Favorite (user-genre)
+-	Genres (Movie-genre)
+-	Similar (Movie-Movie)
+o	relevance
+
+### CONSUMO
+
+Consulta de la ddbb para obtener las 5 peliculas mas relevantes para un usuario dado
+
+## INSTRUCCIONES DE USO
 
 How to run the application to recommend a movie by user similarity (recommendation system based in collaborative filtering):
 
