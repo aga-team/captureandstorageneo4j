@@ -6,6 +6,11 @@ El código almacenado en este repositorio constituye el entregable final para la
 
 https://www.info.unlp.edu.ar/especializacion-en-inteligencia-de-datos-orientada-a-big-data/
 
+Alumnos: 
+
+- Dra. Analisa Mariazzi (analisam@gmail.com)
+- Dr. Gastón Giordano (gaston2031@gmail.com)
+- Lic. Alejo Hernandez (homocuadratus@gmail.com)
 
 ## OBJETIVO
 
@@ -15,7 +20,17 @@ Estudiar las fases de captura y almacenamiento de la información implementando 
 
 ### PYTHON
 
+Nacido en 1991 de la mano de Guido Van Rossum, Python es un lenguaje de programación interpretado cuya filosofía hace hincapié en la legibilidad de su código. Se trata de un lenguaje multiparadigma, pues soporta la programación orientada a objetos (OOP), imperativa y, en menor medida, funcional. 
+
+Python es un lenguaje interpretado, dinámico y multiplataforma que actualmente es administrado por la Python Software Foundation (PSF). El mismo posee una licencia de código abierto, denominada Python Software Foundation License.
+
+Las motivaciones principales a la hora de utilizar este lenguaje para nuestro desarrollo fueron su simplicidad de uso, combinada con su amplia adopción en los entornos de trabajo de Data Science y el enorme soporte brindado por la comunidad.
+
+Para más información sobre Python, visite https://www.python.org/about/
+
 ### NEO4J
+
+
 
 ### DOCKER
 
