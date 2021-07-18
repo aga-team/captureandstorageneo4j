@@ -43,9 +43,9 @@ Neo4j se define como una base de grafos nativa ya que implementa de forma eficie
 
 Algunas de las prestaciones que vuelven popular a Neo4j entre desarrolladores, arquitectos y DBAs son: 
 
-- Cypher, el lenguaje de consulta declarativo, similar a SQL pero optimizado para grafos.
-- Tiempo de exploracion constantes en grafos grandes gracias a la representacion eficiente de nodos y relaciones que posibilita escalar a millones de nodos en hardware moderado.
-- Esquema de modelo de grafos con propiedades flexible, lo cual posibilita la adaptacion con el paso del tiempo para agregar nuevas relaciones cuando las necesidades del proyecto cambian.
+- Cypher, un lenguaje de consulta declarativo basado en SQL que permite explotar la estructura de grafo de Neo4j. 
+- Tiempo de exploracion constante en bases con millones de nodos y relaciones, lo cual posibilita escalar la base en hardware moderado.
+- Esquema flexible de modelo de grafos con propiedades, lo cual permite la rapida adaptacion de la base para satisfacer nuevas necesidades de negocio.
 - Drivers para los lenguajes de programacion mas populares, incluyendo Java, JavaScript, .NET, Python, y muchos mas.
 
 #### El modelo de grafos con propiedaes
@@ -66,13 +66,63 @@ El siguiente esquema permite entender de forma más acabada el modelo de grafos 
 
 Cypher es un lenguaje de consulta declarativo que permite consultar, actualizar y administrar la base de datos basada en grafos de manera simple y eficiente. 
 
-- **Estructura** Cypher toma prestada su estructura de SQL — las consultas estan se construyen en base a cláusulas que pueden concatenarse entre si y pasar los resultados de una a otra. Por ejemplo, la variable que surja del uso de una clausula `MATCH` será el contexto en el que la siguiente cláusula existirá. Algunos de las comandos más importantes son: `MATCH`, que expresa el patrón de grafo a evaluar (equivalente a un `SELECT`); `WHERE` usualmente vinculada con las clásulas `MATCH`, `OPTIONAL MATCH` y `WITH`; `RETURN` que expresa el resultado a mostrar.
+- **Estructura** Cypher toma prestada su estructura de SQL, en el sentido de que las consultas se construyen en base a cláusulas que pueden concatenarse entre si y pasar los resultados de una a otra. Algunos de las comandos más importantes son: `MATCH`, que expresa el patrón de grafo a evaluar (equivalente a un `SELECT`); `WHERE` usualmente vinculada con las clásulas `MATCH`, `OPTIONAL MATCH` y `WITH`; `RETURN` que expresa el resultado a mostrar.
 
 
 Para conocer más sobre Cypher, visite https://neo4j.com/docs/cypher-manual/current/introduction/#cypher-intro
 
 ### DOCKER
 <img src="/images/docker.png" alt="drawing" width="20%"/>
+
+#### Introducción
+
+Docker es una plataforma abierta para desarrollar, transportar y correr aplicaciones. El mismo permite separar las aplicaciones de la infrastructura, posibilitando una entrega de software rápida.
+
+Docker provee la habilidad de empaquetar y correr una aplicación en un entorno "aislado" llamado container. El aislamiento y la seguridad permite que puedan correrse varios containers al mismo tiempo en un host dado. Los containers son livianos y contienen todo lo necesario para correr la aplicación, evitando así la necesidad de tener que confiar en los paquetes instalados en el host. Los containers se emplean principalmente para compartir desarrollos y garantizarse de que cada destinatario recibe el mismo entorno y que todo funciona de la misma manera. Este último punto fue el que motivó la elección del mismo como medio para distribuir nuestro trabajo.
+
+#### Arquitectura
+
+<img src="/images/docker_architecture.svg" alt="drawing" width="90%"/>
+
+Docker utiliza una arquitectura de tipo cliente-servidor. El cliente de Docker client se comunica con el demonio para que este último contruya, corra y distribuya los contenedores. Tanto el cliente como el demonio pueden residir en el mismo sistema, como asi también podemos tener un cliente local y un demonio remoto. Los mismos utilizan una API REST sobre sockets de UNIX o una interfaz de red para comunicarse. 
+
+Otro cliente de Docker es el llamado Docker Compose, el cual permite trabajar con aplicaciones que involucran más de un container.
+
+- El demonio de Docker
+
+El demonio de Docker `dockerd` escucha los pedidos de la API y administra los objetos de Docker, como imagenes, containers, redes y volumenes. Un dmeonio puede comunicarse con otros para adminitrar servicios de Docker.
+
+- El cliente de Docker
+
+El cliente de Docker `docker` es la vía principal que los distintos usuarios utilizan para interactuar con Docker. Cuando utilizamos comandos como `docker run`, el cliente envía los mismos vía API al demonio `dockerd`, el cual los ejecuta. Un cliente puede comunicarse con varios demonios a la vez.
+
+- Registros de Docker
+
+Un registro de Docker almacena imágenes. Docker Hub is un registro público que cualquiera puede usar. Docker está configurado por default para buscar imágenes en ese registro y descargarla si no las tiene.
+
+Cuando se hace un `docker pull` o `docker run`, las imágenes son descargadas desde el registro configurado. Cuando se usa el comando `docker push`, la imágen es sincronizada con el registro configurado.
+
+- Objetos de Docker
+
+Al utilizar Docker, se crean y utilizan imágenes, containers, redes, volúmenes, plugins y otros objetos. A continuación se describen algunos de ellos:
+
+**Images**
+
+Una imagen es una plantilla de solo lectura con instrucciones para crear un container de Docker. Usualmente, una imágen está basada en otra, con alguna reforma adicional. Por ejemplo, en el trabajo se utilizó una imágen de Ubunto con Neo4j a la que se adicionaron Python y diversas librerías e instrucciones para que pudiera correr la aplicación correctamente.
+
+Para construir una imágen, es necesario crear un `Dockerfile`, el cual, mediante una sintaxis sencilla, define los pasos a emplear. Cada instrucción en el `Dockerfile` crea una capa en la imágen. En caso de establecer cambiso en el mismo, sólo aquellas capas afectadas son reconstruidas cuando se vuelve a crear la imágen. Esto es lo que posibilita que las imágenes pueden ser tan livianas, pequeñas y rápidas comparadas con otras tecnologías de virtualización.
+
+**Containers**
+
+A container is a runnable instance of an image. You can create, start, stop, move, or delete a container using the Docker API or CLI. You can connect a container to one or more networks, attach storage to it, or even create a new image based on its current state.
+
+By default, a container is relatively well isolated from other containers and its host machine. You can control how isolated a container’s network, storage, or other underlying subsystems are from other containers or from the host machine.
+
+A container is defined by its image as well as any configuration options you provide to it when you create or start it. When a container is removed, any changes to its state that are not stored in persistent storage disappear.
+An image is a read-only template with instructions for creating a Docker container. Often, an image is based on another image, with some additional customization. For example, you may build an image which is based on the ubuntu image, but installs the Apache web server and your application, as well as the configuration details needed to make your application run.
+
+You might create your own images or you might only use those created by others and published in a registry. To build your own image, you create a Dockerfile with a simple syntax for defining the steps needed to create the image and run it. Each instruction in a Dockerfile creates a layer in the image. When you change the Dockerfile and rebuild the image, only those layers which have changed are rebuilt. This is part of what makes images so lightweight, small, and fast, when compared to other virtualization technologies.
+
 
 ## ETAPAS DEL PROCESO DE IMPLEMENTACION
 
