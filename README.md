@@ -243,12 +243,12 @@ Para poder correr estos comandos en forma local, se asume que el usuario tiene i
 ```
 git clone https://github.com/aga-team/captureandstorageneo4j
 ```
-2. Acceder al directorio `recommendation_by_user_similarity` y construir el container de Docker usando la imágen `neo4j-load:1`:
+2. Ir al directorio `recommendation_by_movie_similarity` y ejecutar el comando para construir el container usando la imagen `neo4j-load-movie:1`:
 
 ```
-cd captureandstorageneo4j/recommendation_movie_by_user_similarity 
+cd captureandstorageneo4j/recommendation_movie_by_movie_similarity 
 
-docker build -t neo4j-load:1
+docker build -t neo4j-load-movie:1 .
 ```
 La opción `-t` especifica el nombre y tag de la versión de la imágen, `.` especifica el contexto de construcción donde reside el `Dockerfile`
 
@@ -262,44 +262,18 @@ para verificar que nuestro container fue correctamente creado en nuestra máquin
 
 5. Ejecutar el container usando:
 
-```docker run -it --name neo1 neo4j-load:1```
-
-Este proceso demora unos 15 minutos.
-
-6. Al finalizar el proceso de ejecución, se abre una terminal interna que nos permite ejecutar una consulta de Cypher para encontrar las 5 películas para ser romendadas a un cierto usuario. El comandos a emplear es:
-
-```
-docker exec -ti neo1 cypher-shell -u neo4j -p test  -f movie_by_user_query.cql
-```
-
-### Recomendador de películas por similitud de contenido
-
-1. Idem anterior
-2. Ir al directorio `recommendation_by_movie_similarity` y ejecutar el comando para construir el container:
-
-```
-cd captureandstorageneo4j/recommendation_movie_by_movie_similarity 
-
-docker build -t neo4j-load-movie:1
-```
-
-Este proceso demora aproximadamente 20 minutos, produciendo un container de 1.81 GB
-
-3. Idem anterior
-4. Ejecutamos el container usando:
-
 ```docker run -it --name neo4j1 neo4j-load-movie:1```
 
 Este proceso demora unos 15 minutos. Se recomienda configurar la memoria RAM asignada a Docker para que tenga un valor de al menos 4 Gb para evitar inconvenientes con la corrida.
 
-5. Finalmente, ejecutamos el comando
+
+6. Al finalizar el proceso, ejecutamos el siguiente comando:
 
 ```
 docker exec -ti neo4j1 cypher-shell -u neo4j -p test  -f movie_query.cql
 ```
 
-El mismo abre una consola nueva y ejecuta una consulta de Cypher para obtener las 5 peliculas recomendadas usando este criterio alternativo.
-
+El mismo abre una consola nueva y realiza una consulta de Cypher para obtener las 5 peliculas recomendadas.
 
 ------------------------------------------------------------------------------------------------------------
 
