@@ -14,9 +14,13 @@ Alumnos:
 
 ## OBJETIVO
 
-Estudiar las fases de captura y almacenamiento de la información implementando un prototipo de recomendador de películas basado en Python y Neo4j.
+Estudiar las fases de captura y almacenamiento de la información implementando un prototipo de recomendador de películas basado en Python, Neo4j y Docker.
 
 ## DESCRIPCION DE LAS HERRAMIENTAS UTILIZADAS
+
+### MOTIVACION
+
+Antes de comenzar con la descripción de cada una de las herramientas empleadas para desarrollar el prototipo, resulta necesario escribir unas líneas que ayuden a comprender el porqué de la elección. En primer lugar, seleccionamos como lenguaje de scripting a `Python`, pues hoy por hoy es el lenguaje natural de las tareas de un Data Scientist, además de tener una sintaxis sencilla y un amplio soporte. En segundo lugar, teniendo en cuenta la estructuración natural de los datos con los que se pensaba trabajar (peliculas con sus respectivos ratings dados por usuarios que las hubieran visto) se decidió emplear `Neo4j`, una base de datos basada en grafos, que permite explotar al máximo las relaciones existentes entre los usuarios bajo análisis y entre ellos con las peliculas consumidas. Finalmente, para disponibilizar el prototipo, se decidió encapsular al mismo dentro de un container de `Docker`, puesto que esta es la manera standard en la actualidad para efectuar ese proceso.
 
 ### PYTHON
 
@@ -183,11 +187,20 @@ Por defecto, un container está relativamente bien aislado de otros containers y
 
 Un container está definido por su imágen, así como también por las opciones de configuración que se proveyeron cuando se creó o se inició. Cuando un container es removido, cualquier cambio de estado que haya sufrido se pierde a menos que se haya persistido en alguna unidad de almacenamiento permanente fuera del mismo.
 
+
+
 ## ETAPAS DEL PROCESO DE IMPLEMENTACION
 
 ### CAPTURA
 
-Captura de la información (via wget en el dockerfile)
+El proceso de captura de la información se procesa dentro del Dockerfile, ejecutando los comandos 
+
+```
+wget -r --no-check-certificate https://files.grouplens.org/datasets/movielens/ml-latest-small.zip
+wget -r --no-check-certificate https://files.grouplens.org/datasets/movielens/ml-25m.zip 
+```
+
+Unan vez descargados estos datasets, se descomprimen y el contenido se mueve a una carpeta desde la cual quedan visibles para ser luego inyectados en Neo4j
 
 ### PREPROCESAMIENTO
  
