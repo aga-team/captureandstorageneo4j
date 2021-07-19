@@ -46,6 +46,7 @@ CMD bin/neo4j-admin set-initial-password ${NEO4J_PASSWD} && \
     if [ -f "${NEO4J_HOME}/import/load_data.cql" ]; then  \
         cat ${NEO4J_HOME}/import/load_data.cql  | NEO4J_USERNAME=neo4j NEO4J_PASSWORD=${NEO4J_PASSWD} bin/cypher-shell --fail-fast ; \
         echo "data load finished ..."; \
+        "This is an internal CLI. Please, open another console and execute docker exec -ti neo4j1 cypher-shell -u neo4j -p test  -f movie_query.cql"
     fi && \
     /bin/bash
 ##################################################################
