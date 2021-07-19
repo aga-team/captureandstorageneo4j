@@ -1,14 +1,9 @@
-#FROM neo4j:4.2.1
-
-FROM neo4j/neo4j-arm64-experimental:4.2.5-arm64
+# FROM neo4j/neo4j-arm64-experimental:4.2.5-arm64 UNCOMMENT IN CASE YOU HAVE AN M1 MAC
+FROM neo4j:4.2.1
 
 ENV NEO4J_HOME="/var/lib/neo4j"   
 ENV NEO4J_PASSWD test 
 ENV PATH "${NEO4J_HOME}"/bin:$PATH
-#ENV NEO4J_dbms.default_listen_address=0.0.0.0
-#ENV NEO4J_dbms.connector.bolt.listen_address=:7687
-#ENV HOSTNAME bolt://$HOST:7687
-#EXPOSE 7687 7474 8080
 
 COPY load_data.cql ${NEO4J_HOME}/import/
 COPY movie_query.cql .
