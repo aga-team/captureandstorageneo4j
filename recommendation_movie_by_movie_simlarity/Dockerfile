@@ -1,10 +1,10 @@
 FROM neo4j:4.2.1
 
+# FROM neo4j/neo4j-arm64-experimental:4.2.5-arm64 for M1 macs
+
 ENV NEO4J_HOME="/var/lib/neo4j"   
 ENV NEO4J_PASSWD test 
 ENV PATH "${NEO4J_HOME}"/bin:$PATH
-ENV HOSTNAME bolt://$HOST:7687
-EXPOSE 7687 7474 8080
 
 COPY load_data.cql ${NEO4J_HOME}/import/
 COPY movie_query.cql .
