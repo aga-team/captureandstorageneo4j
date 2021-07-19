@@ -243,10 +243,10 @@ Para poder correr estos comandos en forma local, se asume que el usuario tiene i
 ```
 git clone https://github.com/aga-team/captureandstorageneo4j
 ```
-2. Ir al directorio `recommendation_by_movie_similarity` y ejecutar el comando para construir el container usando la imagen `neo4j-load-movie:1`:
+2. Ir al directorio `src` y ejecutar el comando para construir el container usando la imagen `neo4j-load-movie:1`:
 
 ```
-cd captureandstorageneo4j/recommendation_movie_by_movie_similarity 
+cd captureandstorageneo4j/src 
 
 docker build --platform=linux/amd64 -t neo4j-load-movie:1 .
 ```
