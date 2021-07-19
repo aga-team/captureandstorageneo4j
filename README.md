@@ -248,7 +248,7 @@ git clone https://github.com/aga-team/captureandstorageneo4j
 ```
 cd captureandstorageneo4j/recommendation_movie_by_movie_similarity 
 
-docker build -t neo4j-load-movie:1 .
+docker build --platform=linux/amd64 -t neo4j-load-movie:1 .
 ```
 La opción `-t` especifica el nombre y tag de la versión de la imágen, `.` especifica el contexto de construcción donde reside el `Dockerfile`
 
@@ -262,18 +262,17 @@ para verificar que nuestro container fue correctamente creado en nuestra máquin
 
 5. Ejecutar el container usando:
 
-```docker run -it --name neo4j1 neo4j-load-movie:1```
+```docker run -it --name neo4j1 --platform=linux/amd64 neo4j-load-movie:1```
 
-Este proceso demora unos 15 minutos. Se recomienda configurar la memoria RAM asignada a Docker para que tenga un valor de al menos 4 Gb para evitar inconvenientes con la corrida.
+Se recomienda configurar la memoria RAM asignada a Docker para que tenga un valor de al menos 4 Gb para evitar inconvenientes con la corrida. Este proceso demora unos 15 minutos y deja un prompt en una CLI interna al container que no debemos cerrar.
 
-
-6. Al finalizar el proceso, ejecutamos el siguiente comando:
+6. Al finalizar el paso anterior, abrimos una consola nueva y ejecutamos:
 
 ```
 docker exec -ti neo4j1 cypher-shell -u neo4j -p test  -f movie_query.cql
 ```
 
-El mismo abre una consola nueva y realiza una consulta de Cypher para obtener las 5 peliculas recomendadas.
+Esto nos devulve un listado con las 5 peliculas recomendadas.
 
 ------------------------------------------------------------------------------------------------------------
 
