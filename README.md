@@ -200,21 +200,23 @@ wget -r --no-check-certificate https://files.grouplens.org/datasets/movielens/ml
 wget -r --no-check-certificate https://files.grouplens.org/datasets/movielens/ml-25m.zip 
 ```
 
-Unan vez descargados estos datasets, se descomprimen y el contenido se mueve a una carpeta desde la cual quedan visibles para ser luego inyectados en Neo4j
+Unan vez descargados, estos dataset zippeados se descomprimen y los archivos `movies.csv`, `genome-scores.csv` y `ratings.csv` que estan en su interior se mueven a la carpeta `/var/lib/neo4j/import` desde la cual seran tomados por el script de python que realizara las tareas de preprocesamiento.
 
 ### PREPROCESAMIENTO
+
+Durante esta etapa, los archivos csv mencionados en el apartado anterior se convierten en dataframes de Python y se les realizan varias transformaciones con el objeto de establecer un criterio de similitud de peliculas. 
+
+En líneas generales, el proceso es como sigue:
+
+1. Se conforma un dataset en el que constan la relevancia de ciertos tags definidos para cada pelicula. Por ejemplo, si tuvieramos una pelicula con id1 y 3 tags T1, T2, T3 con relevancias R1, R2, R3, respectivamente, una fila de esa matriz seria (id1, R1, R2,R3)
+
+2. Se conforma un dataset en el que constan los distintos generos que se le asignan a una dada pelicula. Por ejemplo, si tuvieramos una pelicula con id1 y 3 generos G1, G2, G3, una fila de esa matriz podría ser (id1, 0, 1, 1) en el caso de que sólo estuvieran presentes G2 y G3 para esa película.
+
+3. Se conforma un dataset en el que consta el rating promedio otorgado en distintos periodos de tiempo a una dada pelicula. Por ejemplo, si tuvieramos una pelicula con id1 y 3 intervalos temporales t1, t2, t3, con ratings promedio r1, r2, r3 respectivamente, una fila de esa matriz sería (id1, r1, r2, r3).
+
+4. Sobre la base de cada uno de estos datasets, se calcula la similitud entre peliculas en base a la relevancia de sus tags, sus generos y sus ratings promedio, respectivamente. La documentación sobre la función que calcula la similitud, `cosine similarity`, puede consultarse aqui https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html. Finalmente, las tres similitudes se combinan linealmente para producir un unico valor que es el que finalemente alimenta al recomendador.
  
-Preprocesamiento (via script python)
-
-Definicion del algoritmo para calcular la similitud entre dos películas (via script python)
-
-Fase 1: Armamos una matriz  de movies vs tags con la relevancia del tag en la celda
-
-Fase 2: Armamos una matriz películas vs generos con el flag si esta presente el genero en cada celda
-
-Fase 3: Defino una segmentación por años de las distintas películas (categorica ordinal del 1 al 5) y calculo un rating promedio dentro de cada una de esas categorías
-
-Fase 4: Calculo la similitud entre dos películas como combinación lineal de las cosine similarity entre tag relevance, genres y ratings.
+6.  
 
 Fase 5: Generacion de contenido a ser cargado en neo4j
 
@@ -285,7 +287,7 @@ Se recomienda configurar la memoria RAM asignada a Docker para que tenga un valo
 docker exec -ti neo4j1 cypher-shell -u neo4j -p test  -f movie_query.cql
 ```
 
-Esto nos devulve un listado con las 5 peliculas recomendadas.
+Esto nos devuelve un listado con las 5 peliculas recomendadas.
 
 ------------------------------------------------------------------------------------------------------------
 
