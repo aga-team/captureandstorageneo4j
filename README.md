@@ -214,13 +214,12 @@ En líneas generales, el proceso es como sigue:
 
 3. Se conforma un dataset en el que consta el rating promedio otorgado en distintos periodos de tiempo a una dada pelicula. Por ejemplo, si tuvieramos una pelicula con id1 y 3 intervalos temporales t1, t2, t3, con ratings promedio r1, r2, r3 respectivamente, una fila de esa matriz sería (id1, r1, r2, r3).
 
-4. Sobre la base de cada uno de estos datasets, se calcula la similitud entre peliculas en base a la relevancia de sus tags, sus generos y sus ratings promedio, respectivamente. La documentación sobre la función que calcula la similitud, `cosine similarity`, puede consultarse aqui https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html. Finalmente, las tres similitudes se combinan linealmente para producir un unico valor que es el que finalemente alimenta al recomendador.
+4. Sobre la base de cada uno de estos datasets, se calcula la similitud entre peliculas en base a la relevancia de sus tags, sus generos y sus ratings promedio, respectivamente. La documentación sobre la función que calcula la similitud, `cosine similarity`, puede consultarse aqui https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html. Finalmente, las tres similitudes se combinan linealmente para producir un unico valor que es el que finalmente alimenta el recomendador.
  
-6.  
-
-Fase 5: Generacion de contenido a ser cargado en neo4j
+5. Por último, usando toda esta información, se generan los nodos y las estructuras de relaciones a ser cargadas en `Neo4j` y se guardan como archivos csv en la carpeta `/var/lib/neo4j/import`.
 
 ### ALMACENAMIENTO
+
 
 Carga de nodos y relaciones en Neo4j leyendo el output anterior
 
