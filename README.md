@@ -187,8 +187,6 @@ Por defecto, un container está relativamente bien aislado de otros containers y
 
 Un container está definido por su imágen, así como también por las opciones de configuración que se proveyeron cuando se creó o se inició. Cuando un container es removido, cualquier cambio de estado que haya sufrido se pierde a menos que se haya persistido en alguna unidad de almacenamiento permanente fuera del mismo.
 
-
-
 ## ETAPAS DEL PROCESO DE IMPLEMENTACION
 
 ### CAPTURA
@@ -216,31 +214,30 @@ En líneas generales, el proceso es como sigue:
 
 4. Sobre la base de cada uno de estos datasets, se calcula la similitud entre peliculas en base a la relevancia de sus tags, sus generos y sus ratings promedio, respectivamente. La documentación sobre la función que calcula la similitud, `cosine similarity`, puede consultarse aqui https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html. Finalmente, las tres similitudes se combinan linealmente para producir un unico valor que es el que finalmente alimenta el recomendador.
  
-5. Por último, usando toda esta información, se generan los nodos y las estructuras de relaciones a ser cargadas en `Neo4j` y se guardan como archivos csv en la carpeta `/var/lib/neo4j/import`.
+5. Por último, usando toda esta información, se generan los nodos y las estructuras de relaciones a ser cargadas en `Neo4j` y se guardan como archivos csv en la carpeta `/var/lib/neo4j/import`. Dichos archivos son, para los nodos, `users.csv`, `movies_new.csv` y `genres.csv`, respectivamente, mientras que para las relaciones tenemos `users_movies.csv`, `users_genres.csv`, `movies_genres.csv` y `movies_similarity.csv`
 
 ### ALMACENAMIENTO
 
-
-Carga de nodos y relaciones en Neo4j leyendo el output anterior
+El almacenamiento se produce a partir del insert en Neo4j de los nodos y relaciones codificado en la query `load_data.cql` que se encuentra almacenada en la carpeta `/var/lib/neo4j/import`. Este proceso es la instancia final de ejecución del Dockerfile. Una vez realizado el mismo, tenemos una instancia de Neo4j con los datos cargados, lista para ser utilizada.
 
 Nodos: 
 
 -	Usuarios
-o	User id
+ * User id
 -	Movies
-o	Titulo
-o	Rating_mean
+ * Titulo
+ * Rating_mean
 -	Genres
-o	Genre_id
+ * Genre_id
 
 Relaciones:
 
 -	Watched (user-movie)
-o	Rating
+ * Rating
 -	Favorite (user-genre)
 -	Genres (Movie-genre)
 -	Similar (Movie-Movie)
-o	relevance
+ * relevance
 
 ### CONSUMO
 
