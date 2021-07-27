@@ -241,7 +241,7 @@ Relaciones:
 
 ### CONSUMO
 
-Consulta de la ddbb para obtener las 5 peliculas mas relevantes para un usuario dado
+Por último, a fin de testear el funcionamiento de la ddbb, se ejecuta manualmente la query `movie_query.cql` para obtener las 5 primers peliculas que se le recomiendan al usuario con id = 4. Más precisamente, esta query busca para el usuario con id = 4, las peliculas que haya mirado con ranking más alto y genero más común y luego se trae todas las peliculas que son similares a estas, ordena por ranking y genero y finalmente devuelve las primeras 5 de ese listado como remcomendación para el usuario de id = 4. 
 
 ## INSTRUCCIONES DE USO
 
@@ -259,8 +259,10 @@ git clone https://github.com/aga-team/captureandstorageneo4j
 ```
 cd captureandstorageneo4j/src 
 
-docker build --platform=linux/amd64 -t neo4j-load-movie:1 .
+docker build -t neo4j-load-movie:1 .
 ```
+Obs.: agregar al comando anterior la opción `--platform=linux/amd64` en caso de usar una Macbook com chip M1
+
 La opción `-t` especifica el nombre y tag de la versión de la imágen, `.` especifica el contexto de construcción donde reside el `Dockerfile`
 
 El proceso construcción del container demora aproximadamente 10 minutos.
@@ -273,7 +275,9 @@ para verificar que nuestro container fue correctamente creado en nuestra máquin
 
 5. Ejecutar el container usando:
 
-```docker run -it --name neo4j1 --platform=linux/amd64 neo4j-load-movie:1```
+```docker run -it --name neo4j1 neo4j-load-movie:1```
+
+Obs.: agregar al comando anterior la opción `--platform=linux/amd64` en caso de usar una Macbook com chip M1
 
 Se recomienda configurar la memoria RAM asignada a Docker para que tenga un valor de al menos 4 Gb para evitar inconvenientes con la corrida. Este proceso demora unos 15 minutos y deja un prompt en una CLI interna al container que no debemos cerrar.
 
