@@ -235,7 +235,7 @@ Relaciones:
 
 ### CONSUMO
 
-Por último, a fin de testear el funcionamiento de la ddbb, se ejecuta manualmente la query `movie_query.cql` para obtener las 5 primers peliculas que se le recomiendan al usuario con id = 4. Más precisamente, esta query busca para el usuario con id = 4, las peliculas que haya mirado con ranking más alto y genero más común y luego se trae todas las peliculas que son similares a estas, ordena por ranking y genero y finalmente devuelve las primeras 5 de ese listado como remcomendación para el usuario de id = 4. 
+Por último, a fin de testear el funcionamiento de la base de datos, se ejecuta manualmente la query `movie_query.cql` para obtener las 5 primeras películas que se le recomiendan al usuario con id = 4. Más precisamente, esta query busca para el usuario con id = 4, las películas que haya mirado con ranking más alto y genero más común y luego se trae todas las películas que son similares a estas, ordena por ranking y genero y finalmente devuelve las primeras 5 de ese listado como remcomendación para el usuario de id = 4. 
 
 ## INSTRUCCIONES DE USO
 
