@@ -223,7 +223,7 @@ El almacenamiento se produce a partir del insert en Neo4j de los nodos y relacio
 Nodos: 
 
 -	Usuarios con la propiedad: User id
--	Movies con la propiedades:  Titulo, Rating_mean
+-	Movies con las propiedades:  Titulo, Rating_mean
 -	Genres  con la propiedad: Genre_id
 
 Relaciones:
