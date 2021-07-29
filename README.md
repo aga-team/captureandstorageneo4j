@@ -222,22 +222,16 @@ El almacenamiento se produce a partir del insert en Neo4j de los nodos y relacio
 
 Nodos: 
 
--	Usuarios
- * User id
--	Movies
- * Titulo
- * Rating_mean
--	Genres
- * Genre_id
+-	Usuarios con la propiedad: User id
+-	Movies con la propiedades:  Titulo, Rating_mean
+-	Genres  con la propiedad: Genre_id
 
 Relaciones:
 
--	Watched (user-movie)
- * Rating
+-	Watched (user-movie) con la propiedad: Rating
 -	Favorite (user-genre)
 -	Genres (Movie-genre)
--	Similar (Movie-Movie)
- * relevance
+-	Similar (Movie-Movie) con la propiedad : relevance
 
 ### CONSUMO
 
